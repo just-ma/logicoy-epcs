@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React from "react";
+import { View, Text } from "react-native";
 
 const Patients = props => {
   return (
@@ -8,4 +8,5 @@ const Patients = props => {
     </View>
   );
 };
+
 export default Patients;
