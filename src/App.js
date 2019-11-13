@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Router, Switch, Route } from './routing/routing';
+import { Router, Switch, Route, Link } from './routing/routing';
 import Home from './screens/Home';
 import Patients from './screens/Patients';
 
@@ -8,6 +8,10 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Router>
+      <View> 
+        <Link to="/">Home</Link>
+        <Link to="/patients">Patients</Link>
+      </View>
         <Switch>
           <Route exact path="/" render={props => <Home {...props} />} />
           <Route path="/patients" render={props => <Patients {...props} />} />
