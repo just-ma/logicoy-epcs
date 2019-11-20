@@ -1,20 +1,29 @@
-import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Text, TextInput } from "react-native";
 
-const SearchBar = () => {
+const SearchBar = ({ searchValue, setSearchValue }) => {
   return (
-    <View>
-      <Text>Search Bar</Text>
-    </View>
+    <TextInput
+      placeholder="John Smith"
+      style={styles.searchBar}
+      value={searchValue}
+      onChangeText={text => setSearchValue(text)}
+    />
   );
 };
 
+const SearchBarContainer = ({ children }) => {
+  return <View style={styles.searchBarContainer}>{children}</View>;
+};
+
 const SearchContainer = () => {
+  const [searchValue, setSearchValue] = useState("");
+
   return (
     <View style={styles.searchContainer}>
-      <View style={styles.searchBarContainer}>
-        <SearchBar />
-      </View>
+      <SearchBarContainer>
+        <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+      </SearchBarContainer>
       <View style={styles.searchResult}>
         <Text>Search Container</Text>
       </View>
@@ -49,7 +58,15 @@ const styles = StyleSheet.create({
   },
   searchBarContainer: {
     height: 100,
-    backgroundColor: "brown"
+    padding: 20
+  },
+  searchBar: {
+    padding: 15,
+    borderRadius: 5,
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
+    backgroundColor: "white",
+    fontSize: 18
   },
   searchResult: {
     flex: 1,
