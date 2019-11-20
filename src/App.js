@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Router, Switch, Route, Link } from "./routing/routing";
+import { Router, Switch, Route } from "./routing/routing";
 import NavigationBar from "./components/NavigationBar";
 import Home from "./screens/Home";
 import Patients from "./screens/Patients";

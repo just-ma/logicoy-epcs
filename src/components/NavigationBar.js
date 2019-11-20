@@ -7,7 +7,7 @@ const links = [
   { address: "/patients", name: "Patients" }
 ];
 
-const NavigationBar = props => {
+const NavigationBar = () => {
   return (
     <View style={styles.container}>
       {links.map(l => (
