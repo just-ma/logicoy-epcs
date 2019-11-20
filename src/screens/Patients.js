@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TextInput } from "react-native";
+import {
+  FlatList,
+  View,
+  StyleSheet,
+  Text,
+  TextInput
+} from "react-native";
+import UserItem from "../components/UserItem";
+import users from "../mock/users";
 
 const SearchBar = ({ searchValue, setSearchValue }) => {
   return (
@@ -16,6 +24,19 @@ const SearchBarContainer = ({ children }) => {
   return <View style={styles.searchBarContainer}>{children}</View>;
 };
 
+const SearchResultList = () => {
+  return (
+    <View style={styles.searchResultList}>
+      <FlatList
+        data={users}
+        bounceFirstRowOnMount={true}
+        maxSwipeDistance={160}
+        renderItem={UserItem}
+      />
+    </View>
+  );
+};
+
 const SearchContainer = () => {
   const [searchValue, setSearchValue] = useState("");
 
@@ -24,9 +45,7 @@ const SearchContainer = () => {
       <SearchBarContainer>
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
       </SearchBarContainer>
-      <View style={styles.searchResult}>
-        <Text>Search Container</Text>
-      </View>
+      <SearchResultList />
     </View>
   );
 };
@@ -50,7 +69,7 @@ const Patients = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 500,
+    height: 650,
     flexDirection: "row"
   },
   searchContainer: {
@@ -68,9 +87,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     fontSize: 18
   },
-  searchResult: {
+  searchResultList: {
     flex: 1,
-    backgroundColor: "orange"
   },
   viewContainer: {
     flex: 3,
