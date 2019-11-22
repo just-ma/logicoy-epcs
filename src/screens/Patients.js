@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   FlatList,
   View,
+  Image,
   StyleSheet,
   Text,
   TextInput
@@ -24,20 +25,7 @@ const SearchBarContainer = ({ children }) => {
   return <View style={styles.searchBarContainer}>{children}</View>;
 };
 
-const SearchResultList = () => {
-  return (
-    <View style={styles.searchResultList}>
-      <FlatList
-        data={users}
-        bounceFirstRowOnMount={true}
-        maxSwipeDistance={160}
-        renderItem={UserItem}
-      />
-    </View>
-  );
-};
-
-const SearchContainer = () => {
+const SearchContainer = ({ setUser }) => {
   const [searchValue, setSearchValue] = useState("");
 
   return (
@@ -45,35 +33,62 @@ const SearchContainer = () => {
       <SearchBarContainer>
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
       </SearchBarContainer>
-      <SearchResultList />
+      <FlatList
+        data={users}
+        bounceFirstRowOnMount={true}
+        maxSwipeDistance={160}
+        renderItem={({ item }) => <UserItem item={item} setUser={setUser} />}
+      />
     </View>
   );
 };
 
-const ViewContainer = () => {
+const PatientPreview = ({ user }) => {
+  return (
+    <View style={styles.patientPreview}>
+      <View style={styles.previewHeader}>
+        <Image style={styles.profilePicture} source={user.picture.large} />
+        <View style={styles.previewInfo}>
+          <Text>
+            <h1>{`${user.name.title} ${user.name.first} ${user.name.last}`}</h1>
+          </Text>
+          <Text>
+            {`${user.location.street.number} ${user.location.street.name}`}
+          </Text>
+          <Text>
+            {`${user.location.city}, ${user.location.state} ${user.location.postcode}`}
+          </Text>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const ViewContainer = ({ user }) => {
   return (
     <View style={styles.viewContainer}>
-      <Text>View Container</Text>
+      {user ? <PatientPreview user={user} /> : null}
     </View>
   );
 };
 
 const Patients = () => {
+  const [user, setUser] = useState(null);
   return (
     <View style={styles.container}>
-      <SearchContainer />
-      <ViewContainer />
+      <SearchContainer setUser={setUser} />
+      <ViewContainer user={user} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 650,
+    flex: 1,
     flexDirection: "row"
   },
   searchContainer: {
-    flex: 1
+    width: "350px"
   },
   searchBarContainer: {
     height: 100,
@@ -88,11 +103,28 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   searchResultList: {
-    flex: 1,
+    flex: 1
   },
   viewContainer: {
-    flex: 3,
-    backgroundColor: "green"
+    padding: 20
+  },
+  patientPreview: {
+    margin: 20,
+    padding: 40,
+    backgroundColor: "white",
+    borderRadius: 5
+  },
+  previewHeader: {
+    flexDirection: "row"
+  },
+  profilePicture: {
+    width: 128,
+    height: 128,
+    borderRadius: "50%",
+    boxShadow: "0 1px 2px 0 rgba(0,0,0,0.1)"
+  },
+  previewInfo: {
+    margin: 40
   }
 });
 

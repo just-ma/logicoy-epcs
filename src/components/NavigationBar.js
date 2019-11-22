@@ -22,7 +22,6 @@ const NavigationBar = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row-reverse",
-    width: "100%",
     paddingVertical: 20,
     paddingHorizontal: 40,
     backgroundColor: "black"

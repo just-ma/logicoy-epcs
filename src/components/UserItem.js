@@ -1,15 +1,15 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 
-const UserItem = ({ item: user }) => {
+const UserItem = ({ item: user, setUser }) => {
   return (
-    <View style={styles.row}>
+    <View style={styles.row} onClick={() => setUser(user)}>
       <Image style={styles.rowIcon} source={user.picture.medium} />
       <View style={styles.rowData}>
         <Text style={styles.rowDataText}>{`${user.name.title} ${
           user.name.first
         } ${user.name.last}`}</Text>
-        <Text style={styles.rowDataSubText}>{user.email}</Text>
+        <Text style={styles.rowDataSubText}>{user.phone}</Text>
       </View>
     </View>
   );
