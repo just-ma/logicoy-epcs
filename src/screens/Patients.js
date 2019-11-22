@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Button,
   FlatList,
   View,
   Image,
@@ -52,6 +53,9 @@ const PatientPreview = ({ user }) => {
           <Text>
             <h1>{`${user.name.title} ${user.name.first} ${user.name.last}`}</h1>
           </Text>
+          <View style={styles.previewButton}>
+            <Button title="View Profile" />
+          </View>
           <Text>
             {`${user.location.street.number} ${user.location.street.name}`}
           </Text>
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   searchContainer: {
-    width: "350px"
+    width: 350
   },
   searchBarContainer: {
     height: 100,
@@ -120,11 +124,14 @@ const styles = StyleSheet.create({
   profilePicture: {
     width: 128,
     height: 128,
-    borderRadius: "50%",
-    boxShadow: "0 1px 2px 0 rgba(0,0,0,0.1)"
+    borderRadius: 64,
   },
   previewInfo: {
     margin: 40
+  },
+  previewButton: {
+    width: 150,
+    paddingBottom: 20
   }
 });
 

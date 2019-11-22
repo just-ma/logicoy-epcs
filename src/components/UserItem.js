@@ -30,8 +30,7 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     marginRight: 20,
-    borderRadius: "50%",
-    boxShadow: "0 1px 2px 0 rgba(0,0,0,0.1)"
+    borderRadius: 32,
   },
   rowData: {
     flex: 1
