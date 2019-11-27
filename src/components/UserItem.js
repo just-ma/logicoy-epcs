@@ -4,7 +4,7 @@ import { View, Image, Text, StyleSheet } from "react-native";
 const UserItem = ({ item: user, setUser }) => {
   return (
     <View style={styles.row} onClick={() => setUser(user)}>
-      <Image style={styles.rowIcon} source={user.picture.medium} />
+      <Image style={styles.rowIcon} source={{ uri: user.picture.medium}} />
       <View style={styles.rowData}>
         <Text style={styles.rowDataText}>{`${user.name.title} ${
           user.name.first

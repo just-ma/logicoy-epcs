@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Platform, View } from "react-native";
 import { Router, Switch, Route } from "./routing/routing";
 import NavigationBar from "./components/NavigationBar";
 import Home from "./screens/Home";
@@ -9,11 +9,12 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Router>
-        <NavigationBar />
+        {Platform.OS === "web" && <NavigationBar />}
         <Switch>
           <Route exact path="/" render={props => <Home {...props} />} />
           <Route path="/patients" render={props => <Patients {...props} />} />
         </Switch>
+        {Platform.OS !== "web" && <NavigationBar />}
       </Router>
     </View>
   );

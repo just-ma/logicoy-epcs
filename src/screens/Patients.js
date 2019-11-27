@@ -39,6 +39,7 @@ const SearchContainer = ({ setUser }) => {
         bounceFirstRowOnMount={true}
         maxSwipeDistance={160}
         renderItem={({ item }) => <UserItem item={item} setUser={setUser} />}
+        keyExtractor={(item, i) => i.toString()}
       />
     </View>
   );
@@ -48,7 +49,10 @@ const PatientPreview = ({ user }) => {
   return (
     <View style={styles.patientPreview}>
       <View style={styles.previewHeader}>
-        <Image style={styles.profilePicture} source={user.picture.large} />
+        <Image
+          style={styles.profilePicture}
+          source={{ uri: user.picture.large }}
+        />
         <View style={styles.previewInfo}>
           <Text>
             <h1>{`${user.name.title} ${user.name.first} ${user.name.last}`}</h1>
@@ -124,7 +128,7 @@ const styles = StyleSheet.create({
   profilePicture: {
     width: 128,
     height: 128,
-    borderRadius: 64,
+    borderRadius: 64
   },
   previewInfo: {
     margin: 40
