@@ -16,4 +16,4 @@ Install Expo app (https://expo.io/) on mobile and create an account/log in
 
 `npm start`
 
-Scan QR code with phone and open link in Expo app
+Switch connection to tunnel. Scan QR code with phone and open link in Expo app
