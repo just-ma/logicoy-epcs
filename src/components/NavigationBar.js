@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { Button, View, Platform, StyleSheet, Text } from "react-native";
 import { useHistory } from "react-router-dom";
 
 const pages = [
   { address: "/", label: "Home" },
   { address: "/patients", label: "Patients" }
 ];
+
+const isWeb = Platform.OS === "web";
 
 const NavigationBar = () => {
   const [active, setActive] = useState("/");
@@ -21,13 +23,13 @@ const NavigationBar = () => {
   return (
     <View style={styles.container}>
       {pages.map((p, i) => (
-        <Text
-          key={i}
-          style={styles.item}
-          onPress={() => navigatePage(p.address)}
-        >
-          {p.label}
-        </Text>
+        <View key={i} style={styles.item}>
+          <Button
+            color="black"
+            title={p.label}
+            onPress={() => navigatePage(p.address)}
+          />
+        </View>
       ))}
     </View>
   );
@@ -35,14 +37,13 @@ const NavigationBar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row-reverse",
+    flexDirection: isWeb ? "row-reverse" : "row",
+    justifyContent: isWeb ? "flex-start" : "center",
     paddingHorizontal: 40,
-    backgroundColor: "black"
+    backgroundColor: "grey"
   },
   item: {
-    color: "white",
-    margin: 30,
-    fontSize: 16
+    margin: 10
   }
 });
 

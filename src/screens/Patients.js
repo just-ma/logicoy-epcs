@@ -4,12 +4,15 @@ import {
   FlatList,
   View,
   Image,
-  StyleSheet,
+  Platform,
   Text,
   TextInput
 } from "react-native";
 import UserItem from "../components/UserItem";
 import users from "../mock/users";
+import { getStyle } from "../utils/styleUtils";
+
+const isWeb = Platform.OS === "web";
 
 const SearchBar = ({ searchValue, setSearchValue }) => {
   return (
@@ -85,18 +88,14 @@ const Patients = () => {
   return (
     <View style={styles.container}>
       <SearchContainer setUser={setUser} />
-      <ViewContainer user={user} />
+      {isWeb && <ViewContainer user={user} />}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const stylesRoot = {
   container: {
-    flex: 1,
-    flexDirection: "row"
-  },
-  searchContainer: {
-    width: 350
+    flex: 1
   },
   searchBarContainer: {
     height: 100,
@@ -112,6 +111,15 @@ const styles = StyleSheet.create({
   },
   searchResultList: {
     flex: 1
+  }
+};
+
+const stylesWeb = {
+  container: {
+    flexDirection: "row"
+  },
+  searchContainer: {
+    width: 350
   },
   viewContainer: {
     padding: 20
@@ -137,6 +145,14 @@ const styles = StyleSheet.create({
     width: 150,
     paddingBottom: 20
   }
-});
+};
+
+const stylesMobile = {
+  searchContainer: {
+    flex: 1
+  },
+};
+
+const styles = getStyle(stylesRoot, stylesWeb, stylesMobile, isWeb);
 
 export default Patients;

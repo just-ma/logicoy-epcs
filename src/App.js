@@ -1,28 +1,41 @@
 import React from "react";
-import { StyleSheet, Platform, View } from "react-native";
+import { Platform, View } from "react-native";
 import { Router, Switch, Route } from "./routing/routing";
 import NavigationBar from "./components/NavigationBar";
 import Home from "./screens/Home";
 import Patients from "./screens/Patients";
+import { getStyle } from "./utils/styleUtils";
+
+const isWeb = Platform.OS === "web";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Router>
-        {Platform.OS === "web" && <NavigationBar />}
+        {isWeb && <NavigationBar />}
         <Switch>
           <Route exact path="/" render={props => <Home {...props} />} />
           <Route path="/patients" render={props => <Patients {...props} />} />
         </Switch>
-        {Platform.OS !== "web" && <NavigationBar />}
+        {!isWeb && <NavigationBar />}
       </Router>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const stylesRoot = {
   container: {
     flex: 1,
     backgroundColor: "lightgrey"
   }
-});
+};
+
+const stylesWeb = {};
+
+const stylesMobile = {
+  container: {
+    paddingTop: 20
+  }
+};
+
+const styles = getStyle(stylesRoot, stylesWeb, stylesMobile, isWeb);
